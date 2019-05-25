@@ -1,0 +1,127 @@
+<div class='details-container panel panel-default'>
+	<h1 class='detail-header'>{{name | titlecase}}</h1>
+	<div class='basic-info-container categories-container'>
+		<!-- <h2>Basic Information</h2> -->
+		<div class='loading' ng-hide='pokemon || detailsError'>
+			<i class="fa fa-refresh fa-spin spinner"></i> Retrieving Pokémon...
+		</div>
+		<div class='error' ng-show='detailsError'>
+			Welp. Those Pokémon are tricky to catch. We seem to have run into an error. Please try again later.
+		</div>
+		<div class='pokemon-response' ng-if='pokemon'>
+				<div class='pokemon-header'>
+					<!-- <h3 class='gender'>Male</h3> -->
+					<img ng-src="/pokedex/assets/img/normal/{{name}}.gif">
+				</div>
+			<div class='measurements category'>
+				<h3>Height</h3>
+				<span class='measure'>{{pokemon.height.ft}} ({{pokemon.height.m}})</span>
+				<h3>Weight</h3>
+				<span class='measure'>{{pokemon.weight.lbs}} ({{pokemon.weight.kg}})</span>
+			</div>
+			<div class='abilities category'>
+				<h3>Abilities</h3>
+				<span class='category-list' ng-repeat='ability in pokemon.abilities'
+					class="abilities">{{ability | titlecase}}</span>
+			</div>
+			<div class='types category'>
+				<h3>Type(s)</h3>
+				<span class='category-list' ng-repeat='type in pokemon.type'>{{type | titlecase}}</span>
+			</div>
+			<div class='stats'>
+				<h3>Base Stats</h3>
+				<table class="table">
+					<tr ng-repeat='stat in pokemon.stats'>
+						<td>{{stat.stat.name | titlecase}}</td>
+						<td>{{stat.base_stat}}</td>
+						<td class='bar'>
+							<span ng-style='{"width": stat.base_stat}' ng-class='{
+									"bar-20": stat.base_stat <= 20,
+									"bar-40": stat.base_stat > 20,
+									"bar-60": stat.base_stat > 40,
+									"bar-80": stat.base_stat > 60,
+									"bar-100": stat.base_stat > 80,
+									"bar-120": stat.base_stat > 100,
+									"bar-140": stat.base_stat > 120,
+									"bar-160": stat.base_stat > 140
+								}'></span>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class='species-container categories-container'>
+		<!-- <h2>Species Information</h2> -->
+		<div class='loading' ng-hide='species || speciesError || detailsError'>
+			<i class="fa fa-refresh fa-spin spinner"></i> Retrieving Species...
+		</div>
+		<div class='error' ng-show='speciesError'>
+			Hmm. An error occured when trying to find out more information about this Pokémon. Please try again
+			later.
+		</div>
+		<div class='species-response' ng-if='species'>
+			<div class='category'>
+				<h3>Name</h3>
+				<span>{{species.name | titlecase}}</span>
+			</div>
+			<div class='category'>
+				<h3>Generation</h3>
+				<span>{{species.generation | titlecase}}</span>
+			</div>
+			<div class='category'>
+				<h3>Genus</h3>
+				<span>{{species.genus | titlecase}}</span>
+			</div>
+			<div class='category'>
+				<h3>Color</h3>
+				<span>{{species.color | titlecase}}</span>
+			</div>
+			<div class='category'>
+				<h3>Habitat</h3>
+				<span>{{species.habitat | titlecase}}</span>
+			</div>
+			<div class='category'>
+				<h3>Capture Rate</h3>
+				<span>{{species.captureRate}}</span>
+			</div>
+			<div class='category'>
+				<h3>Growth Rate</h3>
+				<span>{{species.growthRate | titlecase}}</span>
+			</div>
+			<div class='category'>
+				<h3>Gender Rate</h3>
+				<span class='gender' ng-hide="species.genderRate.genderless" title='Male'><i class="fa fa-mars"
+						aria-hidden="true"></i> {{species.genderRate.male}}</span>
+				<span class='gender' ng-hide="species.genderRate.genderless" title='Fedefault'><i class="fa fa-venus"
+						aria-hidden="true"></i> {{species.genderRate.female}}</span>
+				<span class='gender' ng-hide="!species.genderRate.genderless">{{species.genderRate.genderless}}</span>
+			</div>
+			<!-- <div class='category'>
+				<h3>Varieties</h3>
+				<a class='varieties name' ng-repeat='variety in species.varieties' ng-href='#/pokemon/{{variety.pokemon.name}}'>{{variety.pokemon.name | titlecase}}</a>
+			</div> -->
+		</div>
+	</div>
+	<div class='evolution-container categories-container'>
+		<h2>Evolution Chain</h2>
+		<div ng-show='hideEvolutionResponse && !imagesLoaded && !evoError'>There is no evolution for this Pokémon.</div>
+		<div class='loading'
+			ng-hide='imagesLoaded || hideEvolutionResponse || evoError || speciesError || detailsError'>
+			<i class="fa fa-refresh fa-spin spinner"></i> Retrieving Evolution...
+		</div>
+		<div class='error' ng-show='evoError'>
+			Welp. An error occured when trying to find this Pokémon's evolution chain. Please try again later.
+		</div>
+		<div ng-if='evolution' ng-show='imagesLoaded' class='evolution-origin'>
+			<sprite loaded="areImagesLoaded()" hide='hideEvolution()' class='yellow' name='evolution.chain.species.name'></sprite>
+			<div ng-repeat='step1 in evolution.chain.evolves_to'>
+				<sprite loaded="areImagesLoaded()" class='orange' name='step1.species.name'></sprite>
+				<div ng-repeat='step2 in step1.evolves_to'>
+					<sprite loaded="areImagesLoaded()" class='purple' name='step2.species.name'></sprite>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

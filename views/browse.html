@@ -1,0 +1,19 @@
+<div class="browse-container panel panel-default">
+
+	<div class="input-group search" ng-show="loaded">
+		<span class="input-group-addon" id="basic-addon1">Filter</span>
+		<input type="text" class="form-control" placeholder="Enter a search term..." ng-model="search">
+	</div>
+
+	<div class="loading" ng-hide="loaded">
+		<i class="fa fa-refresh fa-spin spinner"></i> Catching Pokémon...
+	</div>
+	<div class="error" ng-show="error">
+		Welp. Those Pokémon are tricky to catch. We seem to have run into an error. Please try again later.
+	</div>
+
+	<div class="browse-results-container" ng-if="pokemon">
+		<pokemon ng-repeat="poke in pokemon | filter:search" name="poke.name" sprite-url="poke.sprite"></pokemon>
+	</div>
+	<!-- <paginate ng-if="pages" pages="pages" current-page="currentPage"></paginate> -->
+</div>

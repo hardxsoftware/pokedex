@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="pokemon">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>Pokémon</title>
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/Favicon.ico">
+    <link href="assets/css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="assets/libs/jquery.min.js"></script>
+</head>
+
+<body ng-controller="HomeController">
+
+    <!-- <nav ng-hide="home">
+        <img class="nav-button" src="./assets/img/back.png" alt="Browse" back />
+        <a href="#/">
+            <img class="nav-button" src="./assets/img/home.png" alt="Home" />
+        </a>
+    </nav> -->
+
+    <div ng-view></div>
+
+    <script src="assets/libs/angular.min.js"></script>
+    <script src="assets/libs/angular-route.min.js"></script>
+    <script src="assets/libs/ng-lodash.min.js"></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>

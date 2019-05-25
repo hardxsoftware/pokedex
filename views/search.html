@@ -1,0 +1,16 @@
+<div class="names-container panel panel-default">
+	<h1>Search By Name</h1>
+	<div class="input-group search" ng-show="loaded">
+		<span class="input-group-addon" id="basic-addon1">Filter</span>
+		<input type="text" class="form-control" placeholder="Enter a search term..." aria-describedby="basic-addon1" ng-model="search" autofocus>
+	</div>
+	<a class="name" ng-repeat="name in names | filter:search | orderBy:name" href="#/pokemon/{{name}}">
+		{{name | titlecase}}
+	</a>
+	<div class="loading" ng-hide="loaded">
+		<i class="fa fa-refresh fa-spin spinner"></i> Catching Pokémon...
+	</div>
+	<div class="error" ng-show="error">
+		Welp. Those Pokémon are tricky to catch. We seem to have run into an error. Please try again later.
+	</div>
+</div>

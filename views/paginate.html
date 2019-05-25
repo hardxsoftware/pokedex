@@ -1,0 +1,17 @@
+<div>
+  <ul class="pagination">
+    <li ng-hide="currentPage === 1">
+      <a ng-href="#/pokemon?page={{currentPage - 1}}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li ng-class='{"active": currentPage === i}' ng-repeat="i in pages | myLimitTo:5:start">
+      <a ng-href="#/pokemon?page={{i}}">{{i}}</a>
+    </li>
+    <li ng-hide="currentPage === pages.length">
+      <a ng-href="#/pokemon?page={{currentPage + 1}}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</div>
