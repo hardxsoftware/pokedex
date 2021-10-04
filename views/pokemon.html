@@ -1,4 +1,5 @@
 <div class="pokemon-container">
-	<img class="pokemon-image" ng-src="/pokedex/assets/img/normal/{{name}}.gif" fallback-src="https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/Pokemon_XY_Sprites/{{spriteUrl}}.png">
+	<!-- <img class="pokemon-image" ng-src="/pokedex/assets/img/normal/{{name}}.gif" fallback-src="https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/Pokemon_XY_Sprites/{{spriteUrl}}.png"> -->
+	<img class="pokemon-image" ng-src="https://play.pokemonshowdown.com/sprites/ani/{{name}}.gif" fallback-src="https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/Pokemon_XY_Sprites/{{spriteUrl}}.png">
 	<div class="pokemon-name">{{name | titlecase}}</div> {{spriteUrl}}
 </div>
