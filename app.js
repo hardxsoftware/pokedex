@@ -24,7 +24,7 @@ angular.module("pokemon", ["ngRoute", "ngLodash"]).config(["$routeProvider", "$s
         if ($scope.currentPage === 1) {
             offset = 0;
         } else {
-            offset = ($scope.currentPage - 1) * 721;
+            offset = ($scope.currentPage - 1) * 898;
         }
 
         var formSpriteUrl = function (url) {
@@ -44,9 +44,9 @@ angular.module("pokemon", ["ngRoute", "ngLodash"]).config(["$routeProvider", "$s
         };
 
         var getPokemonByPage = function (offset) {
-            $http.get('https://pokeapi.co/api/v2/pokemon/?limit=721' + '&offset=' + offset)
+            $http.get('https://pokeapi.co/api/v2/pokemon/?limit=898' + '&offset=' + offset)
                 .then(function (res) {
-                    $scope.pages = lodash.range(1, Math.ceil(res.data.count / 721) + 1);
+                    $scope.pages = lodash.range(1, Math.ceil(res.data.count / 898) + 1);
                     $scope.pokemon = parsePokemon(res.data.results);
                     $scope.loaded = true;
                 }, function (err) {
