@@ -1,9 +1,25 @@
 <div class="browse-container panel panel-default">
 
-	<div class="input-group search" ng-show="loaded">
-		<span class="input-group-addon" id="basic-addon1">Filter</span>
-		<input type="text" class="form-control" placeholder="Enter a search term..." ng-model="search">
-	</div>
+	<div class="fixed-top nav-scroller bg-body shadow-sm" style="margin-top: 56px!important;">
+        <nav class="nav nav-underline" aria-label="Secondary navigation">
+
+		  <div class="input-group" style="margin:3px 0.3em!important" ng-show="loaded">
+			<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">pokemon</button>
+			<ul class="dropdown-menu">
+				<li><a class="dropdown-item" href="#">Action</a></li>
+				<li><a class="dropdown-item" href="#">Another action</a></li>
+				<li><a class="dropdown-item" href="#">Something else here</a></li>
+				<li>
+					<hr class="dropdown-divider">
+				</li>
+				<li><a class="dropdown-item" href="#">Separated link</a></li>
+			</ul>
+			<input type="text" class="form-control" aria-label="Text input with dropdown button" ng-model="search">
+		</div>
+        </nav>
+      </div>
+
+
 
 	<div class="loading" ng-hide="loaded">
 		<i class="fa fa-refresh fa-spin spinner"></i> Catching Pokémon...
@@ -11,9 +27,13 @@
 	<div class="error" ng-show="error">
 		Welp. Those Pokémon are tricky to catch. We seem to have run into an error. Please try again later.
 	</div>
-
-	<div class="browse-results-container" ng-if="pokemon">
-		<pokemon ng-repeat="poke in pokemon | filter:search" name="poke.name" sprite-url="poke.sprite"></pokemon>
+	<div class="container-fluid">
+		<div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 browse-results-container text-center"
+			ng-if="pokemon">
+			<pokemon class="col pokemon-grid gy-2 gx-2" ng-repeat="poke in pokemon | filter:search" name="poke.name"
+				sprite-url="poke.sprite">
+			</pokemon>
+		</div>
+		<!-- <paginate ng-if="pages" pages="pages" current-page="currentPage"></paginate> -->
 	</div>
-	<!-- <paginate ng-if="pages" pages="pages" current-page="currentPage"></paginate> -->
 </div>

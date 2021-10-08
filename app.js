@@ -36,7 +36,8 @@ angular.module("pokemon", ["ngRoute", "ngLodash"]).config(["$routeProvider", "$s
         var parsePokemon = function (results) {
             var pokemon = results.map(function (result) {
                 return {
-                    name: result.name,
+                    name: result.name.replace(/-hero|-normal|-average|-male|-amped|-disguised|-ordinary|-aria|-incarnate|-plant|-altered|-land|-red-striped|-standard|-shield|-midday|-solo|-red-meteor|-baile|-ice|-single-strike|-/g,''),
+                    pokeUrl: result.name,
                     sprite: formSpriteUrl(result.url)
                 };
             });
@@ -74,7 +75,8 @@ angular.module("pokemon", ["ngRoute", "ngLodash"]).config(["$routeProvider", "$s
             .controller('PokemonDetailController', ['$scope', 'PokemonDetailFactory',
                 'PokemonEvolutionFactory', 'PokemonSpeciesFactory', '$routeParams', function ($scope, PokemonDetailFactory, PokemonEvolutionFactory, PokemonSpeciesFactory, $routeParams) {
 
-                    $scope.name = $routeParams.name;
+                    $scope.name = $routeParams.name.replace('-mega-','-mega');
+                    $scope.order = $routeParams.order;
                     var directiveImageLoadedCount = 0;
                     var evolutionCount = 0;
 
@@ -211,6 +213,7 @@ angular.module("pokemon", ["ngRoute", "ngLodash"]).config(["$routeProvider", "$s
                                             link: function (scope, elem, attr) {
                                                 elem.bind('click', function () {
                                                     var url = '/pokemon/' + scope.name;
+
                                                     scope.$apply(function () {
                                                         $location.url(url);
                                                     });
@@ -226,7 +229,7 @@ angular.module("pokemon", ["ngRoute", "ngLodash"]).config(["$routeProvider", "$s
                                                     loaded: '&',
                                                     hide: '&'
                                                 },
-                                                template: '<img class="sprite" ng-src="{{url}}"><span class="sprite-label">{{name | titlecase}}</span>',
+                                                template: '<img class="sprite" ng-src="{{url}}">',
                                                 link: function (scope, elem, attr) {
                                                     // bug fix: use default variety name to get sprite and for linking
                                                     var checkName = function (name) {
@@ -249,16 +252,19 @@ angular.module("pokemon", ["ngRoute", "ngLodash"]).config(["$routeProvider", "$s
                                                             case 'meowstic':
                                                                 name = 'meowstic-male';
                                                                 return name;
+                                                            case 'nidoran':
+                                                                name = 'nidoran-m';
+                                                                return name;
                                                             default:
                                                                 return name;
                                                         }
                                                     };
-
+                                                    // SPRITES FOR EVOLUTIONS
                                                     var getSprite = function (name, callback) {
 
                                                         $http.get('https://pokeapi.co/api/v2/pokemon/' + checkName(name) + '/', { cache: true })
                                                             .then(function (res) {
-                                                                var url = "/pokedex/assets/img/normal/" + res.data.name + ".gif";
+                                                                var url = "https://play.pokemonshowdown.com/sprites/ani/" + res.data.name.replace('-','') + ".gif";
                                                                 callback(null, url);
                                                             }, function (err) {
                                                                 callback(err);
@@ -268,7 +274,7 @@ angular.module("pokemon", ["ngRoute", "ngLodash"]).config(["$routeProvider", "$s
                                                     getSprite(scope.name, function (err, res) {
                                                         if (err) {
                                                             console.log(err);
-                                                            elem.find('img').attr('src', '/pokedex/assets/img/normal/' + res.data.name +'.gif');
+                                                            elem.find('img').attr('src', 'https://play.pokemonshowdown.com/sprites/ani/' + res.data.name.replace('-','') +'.gif');
                                                             scope.hide();
                                                         }
 

@@ -1,5 +1,26 @@
-<div class="pokemon-container">
-	<!-- <img class="pokemon-image" ng-src="/pokedex/assets/img/normal/{{name}}.gif" fallback-src="https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/Pokemon_XY_Sprites/{{spriteUrl}}.png"> -->
-	<img class="pokemon-image" ng-src="https://play.pokemonshowdown.com/sprites/ani/{{name}}.gif" fallback-src="https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/Pokemon_XY_Sprites/{{spriteUrl}}.png">
-	<div class="pokemon-name">{{name | titlecase}}</div> {{spriteUrl}}
+<div class="card">
+	<div class="card-header">
+		<span class="badge rounded-pill badge-notification bg-danger"
+		style="margin: 0;">{{spriteUrl}}</span>
+		<span class='category-list' ng-repeat='type in pokemon.type'>{{type | titlecase}}</span>
+
+	</div>
+	<div class="card-body d-flex align-items-center justify-content-center">
+		<picture>
+			<img class="mx-auto img-fluid" ng-src="https://play.pokemonshowdown.com/sprites/ani/{{name}}.gif" alt="">
+			<!-- <span class="badge rounded-pill badge-notification bg-danger"
+				style="position: absolute; margin: 0;">{{spriteUrl}}</span> -->
+
+		</picture>
+
+		<!-- <img class="pokemon-grid align-middle" ng-src="https://play.pokemonshowdown.com/sprites/ani/{{name}}.gif"> -->
+		<h4 class="pokemon-name"></h4>
+		<span></span>
+	</div>
+	<div class="card-footer sticky-bottom text-muted">
+		{{name | titlecase}}
+	</div>
+	<!-- <div class="card-footer sticky-bottom text-muted">
+		{{spriteUrl}}
+	</div> -->
 </div>

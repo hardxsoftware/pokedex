@@ -1,4 +1,35 @@
-<div class='details-container panel panel-default'>
+<div class='details-container panel panel-default' style="margin-top:-38px">
+	<div class='loading' ng-hide='pokemon || detailsError'>
+		<div class='pokemon-response' ng-if='pokemon'>
+
+			<img ng-src="https://play.pokemonshowdown.com/sprites/ani/{{name}}.gif">
+
+		</div>
+	</div>
+
+	<div class="px-4 py-5 my-0 text-center">
+		<picture>
+			<img class="d-block mx-auto mb-4 img-fluid" ng-src="https://play.pokemonshowdown.com/sprites/ani/{{name}}.gif" alt="">
+		</picture>
+		<h1 class="display-5 fw-bold">{{name | titlecase}}</h1>
+		<div class="col-lg-6 mx-auto">
+			<p class="lead mb-4">
+			<div class='error' ng-show='detailsError'>
+				Welp. Those Pokémon are tricky to catch. We seem to have run into an error. Please try again later.
+			</div>
+			</p>
+			<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+				<button type="button" class="btn btn-primary position-relative">
+					Inbox
+				</button>
+				<button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+			</div>
+		</div>
+	</div>
+
+
+
+
 	<h1 class='detail-header'>{{name | titlecase}}</h1>
 	<div class='basic-info-container categories-container'>
 		<!-- <h2>Basic Information</h2> -->
@@ -9,10 +40,10 @@
 			Welp. Those Pokémon are tricky to catch. We seem to have run into an error. Please try again later.
 		</div>
 		<div class='pokemon-response' ng-if='pokemon'>
-				<div class='pokemon-header'>
-					<!-- <h3 class='gender'>Male</h3> -->
-					<img ng-src="/pokedex/assets/img/normal/{{name}}.gif">
-				</div>
+			<div class='pokemon-header'>
+				<!-- <h3 class='gender'>Male</h3> -->
+				<img ng-src="https://play.pokemonshowdown.com/sprites/ani/{{name}}.gif">
+			</div>
 			<div class='measurements category'>
 				<h3>Height</h3>
 				<span class='measure'>{{pokemon.height.ft}} ({{pokemon.height.m}})</span>
@@ -21,8 +52,8 @@
 			</div>
 			<div class='abilities category'>
 				<h3>Abilities</h3>
-				<span class='category-list' ng-repeat='ability in pokemon.abilities'
-					class="abilities">{{ability | titlecase}}</span>
+				<span class='category-list' ng-repeat='ability in pokemon.abilities' class="abilities">{{ability |
+					titlecase}}</span>
 			</div>
 			<div class='types category'>
 				<h3>Type(s)</h3>
@@ -114,7 +145,8 @@
 			Welp. An error occured when trying to find this Pokémon's evolution chain. Please try again later.
 		</div>
 		<div ng-if='evolution' ng-show='imagesLoaded' class='evolution-origin'>
-			<sprite loaded="areImagesLoaded()" hide='hideEvolution()' class='yellow' name='evolution.chain.species.name'></sprite>
+			<sprite loaded="areImagesLoaded()" hide='hideEvolution()' class='yellow'
+				name='evolution.chain.species.name'></sprite>
 			<div ng-repeat='step1 in evolution.chain.evolves_to'>
 				<sprite loaded="areImagesLoaded()" class='orange' name='step1.species.name'></sprite>
 				<div ng-repeat='step2 in step1.evolves_to'>
