@@ -45,9 +45,9 @@ angular.module("pokemon", ["ngRoute", "ngLodash"]).config(["$routeProvider", "$s
         };
 
         var getPokemonByPage = function (offset) {
-            $http.get('https://pokeapi.co/api/v2/pokemon/?limit=898' + '&offset=' + offset)
+            $http.get('https://pokeapi.co/api/v2/pokemon/?limit=1008' + '&offset=' + offset)
                 .then(function (res) {
-                    $scope.pages = lodash.range(1, Math.ceil(res.data.count / 898) + 1);
+                    $scope.pages = lodash.range(1, Math.ceil(res.data.count / 1008) + 1);
                     $scope.pokemon = parsePokemon(res.data.results);
                     $scope.loaded = true;
                 }, function (err) {
