@@ -24,7 +24,7 @@ angular.module("pokemon", ["ngRoute", "ngLodash"]).config(["$routeProvider", "$s
         if ($scope.currentPage === 1) {
             offset = 0;
         } else {
-            offset = ($scope.currentPage - 1) * 898;
+            offset = ($scope.currentPage - 1) * 1008;
         }
 
         var formSpriteUrl = function (url) {
